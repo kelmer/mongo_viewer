@@ -1,0 +1,3 @@
+cd /my_stuff/PROGRAMMING/projects/mongo_viewer/src
+pyuic4 -o ui_main.py ui_main.ui
+pyrcc4 resources.qrc -o resources_rc.py
