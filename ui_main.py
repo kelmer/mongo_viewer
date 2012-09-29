@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_main.ui'
 #
-# Created: Sat Sep 22 18:40:33 2012
+# Created: Sat Sep 29 15:27:10 2012
 #      by: PyQt4 UI code generator 4.8.5
 #
 # WARNING! All changes made in this file will be lost!
@@ -71,7 +71,7 @@ class Ui_MainWindow(object):
         self.plainTextEditQueries = QtGui.QPlainTextEdit(self.centralwidget)
         self.plainTextEditQueries.setMaximumSize(QtCore.QSize(16777215, 70))
         font = QtGui.QFont()
-        font.setPointSize(8)
+        font.setUnderline(False)
         self.plainTextEditQueries.setFont(font)
         self.plainTextEditQueries.setObjectName(_fromUtf8("plainTextEditQueries"))
         self.verticalLayout.addWidget(self.plainTextEditQueries)

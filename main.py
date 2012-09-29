@@ -7,7 +7,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 import ui_main
 import connection
-con = None
+
 
 
 class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
@@ -19,6 +19,7 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
         self.setupUi(self)
         self.connect(self.actionNew_Database,SIGNAL("triggered()"), self.add_db)
         self.connect(self.pushButtonConnect, SIGNAL("clicked()"), self.get_connection)
+        self.connect(self.treeWidgetMain, SIGNAL("itemClicked (QTreeWidgetItem *,int)"), self.get_collection)
       
     def add_db(self):
 	''' adds a new database in MongoDB '''        
@@ -36,41 +37,48 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
 
         if len and host:
             try:
-                global con
-                con = connection.get_connection(unicode(host), int(port))
-                self.plainTextEditQueries.insertPlainText("Connected Successfully to MongoDB at " + '<' + con.host + '>')
+                
+                self.con = connection.get_connection(unicode(host), int(port))
+                self.plainTextEditQueries.insertPlainText("Connected Successfully to MongoDB at " + '<' + self.con.host + '>')
                 self.plainTextEditQueries.appendPlainText('Write your Pythonic query here...\n')
                 
             except:
+                font = QFont()
+                font.setUnderline(True)
+                self.plainTextEditQueries.setFont(font)
                 self.plainTextEditQueries.insertPlainText("A problem has ocurred, no connection to MongoDB!")
 
         else:
 
             try:
 
-                global con 
-                con = connection.get_connection()
-                self.plainTextEditQueries.insertPlainText("Connected Successfully to MongoDB at " + '<' + con.host + '>')
+                self.con = connection.get_connection()
+                self.plainTextEditQueries.insertPlainText("Connected Successfully to MongoDB at " + '<' + self.con.host + '>')
                 self.plainTextEditQueries.appendPlainText('Write your Pythonic query here...\n')
-                
-            
-                
-            #self.connect(self.treeWidgetMain, SIGNAL("activated"), self.activated)
+                      
 
             except:
                 self.plainTextEditQueries.insertPlainText("A problem has ocurred, no connection to MongoDB!")
         
         self.populate_main_tree()
 
+    def get_collection(self):
+        '''
+        gets a collection when the user selects a iten in the treewidget
+        '''
+        iten = self.treeWidgetMain.currentItem()
+        if iten.parent() != None:
+            print iten.text(0)
+
     def populate_main_tree(self):
         '''
         populates the main treewidget with the databases in mongodb
         '''
-        dbs = con.database_names() #returns a list with the database names
+        dbs = self.con.database_names() #returns a list with the database names
         cols = {} # collection names
         for i in dbs:
             if i not in cols:
-                db = con[i]
+                db = self.con[i]
                 cols[i] = db.collection_names()
 
         
