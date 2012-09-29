@@ -7,6 +7,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 import ui_main
 import connection
+con = None
 
 
 class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
@@ -35,23 +36,36 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
 
         if len and host:
             try:
+                global con
                 con = connection.get_connection(unicode(host), int(port))
                 self.plainTextEditQueries.insertPlainText("Connected Successfully to MongoDB at " + '<' + con.host + '>')
-                self.plainTextEditQueries.appendPlainText('Write your Pythonic query here if you want...\n')
+                self.plainTextEditQueries.appendPlainText('Write your Pythonic query here...\n')
+                
             except:
                 self.plainTextEditQueries.insertPlainText("A problem has ocurred, no connection to MongoDB!")
 
         else:
-            
-            con = connection.get_connection()
-            self.plainTextEditQueries.insertPlainText("Connected Successfully to MongoDB at " + '<' + con.host + '>')
-            self.plainTextEditQueries.appendPlainText('Write your Pythonic query here if you want...\n')
+
+            try:
+
+                global con 
+                con = connection.get_connection()
+                self.plainTextEditQueries.insertPlainText("Connected Successfully to MongoDB at " + '<' + con.host + '>')
+                self.plainTextEditQueries.appendPlainText('Write your Pythonic query here...\n')
+                
             
                 
             #self.connect(self.treeWidgetMain, SIGNAL("activated"), self.activated)
 
-            #except:
-                #self.plainTextEditQueries.insertPlainText("A problem has ocurred, no connection to MongoDB!")
+            except:
+                self.plainTextEditQueries.insertPlainText("A problem has ocurred, no connection to MongoDB!")
+        
+        self.populate_main_tree()
+
+    def populate_main_tree(self):
+        '''
+        populates the main treewidget with the databases in mongodb
+        '''
         dbs = con.database_names() #returns a list with the database names
         cols = {} # collection names
         for i in dbs:
@@ -59,7 +73,7 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
                 db = con[i]
                 cols[i] = db.collection_names()
 
-        print cols
+        
         self.treeWidgetMain.clear()
         self.treeWidgetMain.setColumnCount(2)
         headers = ['Databases / Collections']
