@@ -76,8 +76,7 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
             self.db = self.con[unicode(item.parent().text(0))]
             self.col = self.db[unicode(item.text(0))]
                 
-            for i in self.col.find():
-                print i
+            for i in self.col.find():                
                 self.textEditMain.append(unicode(i))
         else:
             try:
