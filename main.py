@@ -15,6 +15,9 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
     def __init__(self, parent = None):
         
         super(MainWindow,self).__init__(parent)
+        self.con = None
+        self.db = None
+        self.col = None
         self.showMaximized()
         self.setupUi(self)
         self.connect(self.actionNew_Database,SIGNAL("triggered()"), self.add_db)
@@ -64,11 +67,24 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
 
     def get_collection(self):
         '''
-        gets a collection when the user selects a iten in the treewidget
+        gets a collection when the user selects a item in the treewidget
         '''
-        iten = self.treeWidgetMain.currentItem()
-        if iten.parent() != None:
-            print iten.text(0)
+        self.textEditMain.clear()
+        item = self.treeWidgetMain.currentItem()
+        if item.parent() != None: #which means the item is already a collection
+            
+            self.db = self.con[unicode(item.parent().text(0))]
+            self.col = self.db[unicode(item.text(0))]
+                
+            for i in self.col.find():
+                print i
+                self.textEditMain.append(unicode(i))
+        else:
+            try:
+                del(self.col)                    
+                self.db = self.con[unicode(item.text(0))]
+            except:
+                self.db = self.con[unicode(item.text(0))]
 
     def populate_main_tree(self):
         '''
@@ -88,25 +104,15 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
         self.treeWidgetMain.setHeaderLabels(headers)
         self.treeWidgetMain.setItemsExpandable(True)
         for i in cols:
-            iten = QTreeWidgetItem(self.treeWidgetMain, [i])
+            item = QTreeWidgetItem(self.treeWidgetMain, [i])
             icon = QIcon()
             icon.addPixmap(QPixmap(":/images/images/database.png"), QIcon.Normal, QIcon.Off)
-            iten.setIcon(0,icon)
-            #self.treeWidgetMain.expandItem(iten)            
+            item.setIcon(0,icon)                        
             for j in cols.get(i):
-                sub_iten = QTreeWidgetItem(iten, [j])
+                sub_item = QTreeWidgetItem(item, [j])
                 sub_icon = QIcon()
                 sub_icon.addPixmap(QPixmap(":/images/images/collection.png"), QIcon.Normal, QIcon.Off)
-                sub_iten.setIcon(0,sub_icon)
-                #self.treeWidgetMain.expandItem(sub_iten)
-
-        
-
-        #iten.setTextAlignment(1, Qt.AlignRight|Qt.AlignVCenter)        
-
-
-
-        
+                sub_item.setIcon(0,sub_icon)        
 
 
 if __name__ == '__main__':
