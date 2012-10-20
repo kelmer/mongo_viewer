@@ -7,6 +7,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 import ui_main
 import connection
+from bson import ObjectId
 
 
 
@@ -28,7 +29,8 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
 	''' adds a new database in MongoDB '''        
         con = connection.get_connection()
         db_names = con.database_names()
-        self.textEdit.setText("Existing Databases:\n" + '\n'.join([i for i in db_names]))
+        self.plainTextEditQueries.clear()
+        self.plainTextEditQueries.insertPlainText("Existing Databases:\n" + '\n'.join([i for i in db_names]))
 
 
     def get_connection(self):

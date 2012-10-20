@@ -145,7 +145,11 @@
              </attribute>
              <layout class="QHBoxLayout" name="horizontalLayout_4">
               <item>
-               <widget class="QTableWidget" name="tableWidgetMain"/>
+               <widget class="QTableWidget" name="tableWidgetMain">
+                <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+                 <bool>true</bool>
+                </attribute>
+               </widget>
               </item>
              </layout>
             </widget>
