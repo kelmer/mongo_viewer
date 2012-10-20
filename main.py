@@ -139,8 +139,15 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
         column = 0
         
         for j in self.col.find():            
-            for i in j:                
-                self.tableWidgetMain.setItem(row, headers.index(i), QTableWidgetItem(unicode(j[i])))
+            for i in j:
+                if i in headers:
+                    self.tableWidgetMain.setItem(row, headers.index(i), QTableWidgetItem(unicode(j[i])))
+                
+                else:                    
+                    headers.append(i)
+                    self.tableWidgetMain.setColumnCount(len(headers))
+                    self.tableWidgetMain.setHorizontalHeaderLabels(headers)
+                    self.tableWidgetMain.setItem(row, headers.index(i), QTableWidgetItem(unicode(j[i])))
             row +=1
 
 
