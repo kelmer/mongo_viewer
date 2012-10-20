@@ -37,6 +37,7 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
         '''
         host = unicode(self.lineEditHost.text())
         port = unicode(self.lineEditPort.text())
+        self.plainTextEditQueries.clear()
 
         if len and host:
             try:
@@ -76,8 +77,9 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
             self.db = self.con[unicode(item.parent().text(0))]
             self.col = self.db[unicode(item.text(0))]
                 
-            for i in self.col.find():                
-                self.textEditMain.append(unicode(i))
+            self.populate_text()
+            self.populate_main_table()
+
         else:
             try:
                 del(self.col)                    
@@ -111,7 +113,42 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
                 sub_item = QTreeWidgetItem(item, [j])
                 sub_icon = QIcon()
                 sub_icon.addPixmap(QPixmap(":/images/images/collection.png"), QIcon.Normal, QIcon.Off)
-                sub_item.setIcon(0,sub_icon)        
+                sub_item.setIcon(0,sub_icon)
+
+    def populate_text(self):
+        '''
+        populates the textEditMain field with the data from self.collection
+        '''
+        for i in self.col.find():                
+                self.textEditMain.append(unicode(i))
+
+    def populate_main_table(self):
+        '''
+        populates the main table with the data of the collection selected
+        to preserve memory it limits the rows to 1000
+        '''
+        headers = [i for i in self.col.find_one()]
+        self.tableWidgetMain.clear()
+        self.tableWidgetMain.setSortingEnabled(False)
+
+        self.tableWidgetMain.setColumnCount(len(headers))
+        self.tableWidgetMain.setHorizontalHeaderLabels(headers)
+        self.tableWidgetMain.setRowCount(self.col.find().count())
+                
+        row = 0
+        column = 0
+        
+        for j in self.col.find():            
+            for i in j:                
+                self.tableWidgetMain.setItem(row, headers.index(i), QTableWidgetItem(unicode(j[i])))
+            row +=1
+
+
+        self.tableWidgetMain.setSortingEnabled(True)
+
+        
+
+
 
 
 if __name__ == '__main__':

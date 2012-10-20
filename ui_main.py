@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_main.ui'
 #
-# Created: Sat Sep 29 15:27:10 2012
+# Created: Fri Oct 12 19:06:54 2012
 #      by: PyQt4 UI code generator 4.8.5
 #
 # WARNING! All changes made in this file will be lost!
@@ -81,9 +81,11 @@ class Ui_MainWindow(object):
         self.tab_table.setObjectName(_fromUtf8("tab_table"))
         self.horizontalLayout_4 = QtGui.QHBoxLayout(self.tab_table)
         self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
-        self.tableViewMain = QtGui.QTableView(self.tab_table)
-        self.tableViewMain.setObjectName(_fromUtf8("tableViewMain"))
-        self.horizontalLayout_4.addWidget(self.tableViewMain)
+        self.tableWidgetMain = QtGui.QTableWidget(self.tab_table)
+        self.tableWidgetMain.setObjectName(_fromUtf8("tableWidgetMain"))
+        self.tableWidgetMain.setColumnCount(0)
+        self.tableWidgetMain.setRowCount(0)
+        self.horizontalLayout_4.addWidget(self.tableWidgetMain)
         self.tabWidget.addTab(self.tab_table, _fromUtf8(""))
         self.tab_text = QtGui.QWidget()
         self.tab_text.setObjectName(_fromUtf8("tab_text"))
