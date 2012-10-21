@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/images">
+    <file>images/RUN_Crystal_Clear_app_noatun.png</file>
     <file>images/collection.png</file>
     <file>images/database.png</file>
     <file>images/Misc-New-Database-icon.png</file>

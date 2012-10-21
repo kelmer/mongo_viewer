@@ -21,16 +21,18 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
         self.col = None
         self.showMaximized()
         self.setupUi(self)
-        self.connect(self.actionNew_Database,SIGNAL("triggered()"), self.add_db)
+        self.connect(self.actionNew_Collection,SIGNAL("triggered()"), self.add_collection)
+        self.connect(self.actionRun_Query,SIGNAL("triggered()"), self.run_query)
         self.connect(self.pushButtonConnect, SIGNAL("clicked()"), self.get_connection)
         self.connect(self.treeWidgetMain, SIGNAL("itemClicked (QTreeWidgetItem *,int)"), self.get_collection)
       
-    def add_db(self):
-	''' adds a new database in MongoDB '''        
-        con = connection.get_connection()
-        db_names = con.database_names()
-        self.plainTextEditQueries.clear()
-        self.plainTextEditQueries.insertPlainText("Existing Databases:\n" + '\n'.join([i for i in db_names]))
+    def add_collection(self):
+	''' adds a new collection in MongoDB '''        
+        pass
+        #con = connection.get_connection()
+        #col_names = con.database_names()
+        #self.plainTextEditQueries.clear()
+        #self.plainTextEditQueries.insertPlainText("Existing Databases:\n" + '\n'.join([i for i in db_names]))
 
 
     def get_connection(self):
@@ -155,7 +157,12 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
 
         self.tableWidgetMain.setSortingEnabled(True)
 
-        
+    def run_query(self):
+        '''
+        run the pymongo query introduced in the plainTextEditQueries
+        '''
+        query = self.plainTextEditQueries.toPlainText()
+        print unicode(query)      
 
 
 

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_main.ui'
 #
-# Created: Sat Oct 20 16:01:36 2012
+# Created: Sun Oct 21 14:09:50 2012
 #      by: PyQt4 UI code generator 4.8.5
 #
 # WARNING! All changes made in this file will be lost!
@@ -113,14 +113,22 @@ class Ui_MainWindow(object):
         self.toolBar.setIconSize(QtCore.QSize(32, 32))
         self.toolBar.setObjectName(_fromUtf8("toolBar"))
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
-        self.actionNew_Database = QtGui.QAction(MainWindow)
+        self.actionNew_Collection = QtGui.QAction(MainWindow)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/images/images/Misc-New-Database-icon.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.actionNew_Database.setIcon(icon)
-        self.actionNew_Database.setText(QtGui.QApplication.translate("MainWindow", "New Database", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionNew_Database.setToolTip(QtGui.QApplication.translate("MainWindow", "Create a new database", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionNew_Database.setObjectName(_fromUtf8("actionNew_Database"))
-        self.toolBar.addAction(self.actionNew_Database)
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/images/images/collection.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.actionNew_Collection.setIcon(icon)
+        self.actionNew_Collection.setText(QtGui.QApplication.translate("MainWindow", "New Collection", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionNew_Collection.setToolTip(QtGui.QApplication.translate("MainWindow", "Create a new collection", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionNew_Collection.setObjectName(_fromUtf8("actionNew_Collection"))
+        self.actionRun_Query = QtGui.QAction(MainWindow)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(_fromUtf8(":/images/images/RUN_Crystal_Clear_app_noatun.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.actionRun_Query.setIcon(icon1)
+        self.actionRun_Query.setText(QtGui.QApplication.translate("MainWindow", "Run Query", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionRun_Query.setToolTip(QtGui.QApplication.translate("MainWindow", "run a MongoDB Pymongo query", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionRun_Query.setObjectName(_fromUtf8("actionRun_Query"))
+        self.toolBar.addAction(self.actionNew_Collection)
+        self.toolBar.addAction(self.actionRun_Query)
 
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)

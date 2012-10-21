@@ -200,18 +200,31 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionNew_Database"/>
+   <addaction name="actionNew_Collection"/>
+   <addaction name="actionRun_Query"/>
   </widget>
-  <action name="actionNew_Database">
+  <action name="actionNew_Collection">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/images/images/Misc-New-Database-icon.png</normaloff>:/images/images/Misc-New-Database-icon.png</iconset>
+     <normaloff>:/images/images/collection.png</normaloff>:/images/images/collection.png</iconset>
    </property>
    <property name="text">
-    <string>New Database</string>
+    <string>New Collection</string>
    </property>
    <property name="toolTip">
-    <string>Create a new database</string>
+    <string>Create a new collection</string>
+   </property>
+  </action>
+  <action name="actionRun_Query">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/images/images/RUN_Crystal_Clear_app_noatun.png</normaloff>:/images/images/RUN_Crystal_Clear_app_noatun.png</iconset>
+   </property>
+   <property name="text">
+    <string>Run Query</string>
+   </property>
+   <property name="toolTip">
+    <string>run a MongoDB Pymongo query</string>
    </property>
   </action>
  </widget>
