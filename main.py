@@ -8,6 +8,10 @@ from PyQt4.QtGui import *
 import ui_main
 import connection
 from bson import ObjectId
+from ast import literal_eval
+
+
+ROW_LIMIT = 1000 # this is provisional just to try speed
 
 
 
@@ -123,7 +127,7 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
         '''
         populates the textEditMain field with the data from self.collection
         '''
-        for i in self.col.find():                
+        for i in self.col.find().limit(1000):                
                 self.textEditMain.append(unicode(i))
 
     def populate_main_table(self):
@@ -137,12 +141,14 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
 
         self.tableWidgetMain.setColumnCount(len(headers))
         self.tableWidgetMain.setHorizontalHeaderLabels(headers)
-        self.tableWidgetMain.setRowCount(self.col.find().count())
+        self.tableWidgetMain.setRowCount(ROW_LIMIT)
+        # the ROW COUNT above if there is not a LIMIT SHOULD BE CHANGED TO:
+        #self.col.find().limit(1000).count()
                 
         row = 0
         column = 0
         
-        for j in self.col.find():            
+        for j in self.col.find().limit(1000):            
             for i in j:
                 if i in headers:
                     self.tableWidgetMain.setItem(row, headers.index(i), QTableWidgetItem(unicode(j[i])))
@@ -161,8 +167,9 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
         '''
         run the pymongo query introduced in the plainTextEditQueries
         '''
-        query = self.plainTextEditQueries.toPlainText()
-        print unicode(query)      
+        query = unicode(self.plainTextEditQueries.toPlainText())
+        print self.col.find(literal_eval(query)).count()
+        
 
 
 
