@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_main.ui'
 #
-# Created: Sun Oct 21 14:09:50 2012
-#      by: PyQt4 UI code generator 4.8.5
+# Created: Tue Mar 26 22:51:43 2013
+#      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -21,7 +21,6 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(8)
         MainWindow.setFont(font)
-        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.horizontalLayout_3 = QtGui.QHBoxLayout(self.centralwidget)
@@ -31,7 +30,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
         self.label = QtGui.QLabel(self.centralwidget)
-        self.label.setText(QtGui.QApplication.translate("MainWindow", "Host:", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setObjectName(_fromUtf8("label"))
         self.horizontalLayout_2.addWidget(self.label)
         self.lineEditHost = QtGui.QLineEdit(self.centralwidget)
@@ -40,7 +38,6 @@ class Ui_MainWindow(object):
         self.lineEditHost.setObjectName(_fromUtf8("lineEditHost"))
         self.horizontalLayout_2.addWidget(self.lineEditHost)
         self.label_2 = QtGui.QLabel(self.centralwidget)
-        self.label_2.setText(QtGui.QApplication.translate("MainWindow", "Port:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.horizontalLayout_2.addWidget(self.label_2)
         self.lineEditPort = QtGui.QLineEdit(self.centralwidget)
@@ -48,7 +45,6 @@ class Ui_MainWindow(object):
         self.lineEditPort.setObjectName(_fromUtf8("lineEditPort"))
         self.horizontalLayout_2.addWidget(self.lineEditPort)
         self.pushButtonConnect = QtGui.QPushButton(self.centralwidget)
-        self.pushButtonConnect.setText(QtGui.QApplication.translate("MainWindow", "Connect", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonConnect.setObjectName(_fromUtf8("pushButtonConnect"))
         self.horizontalLayout_2.addWidget(self.pushButtonConnect)
         spacerItem = QtGui.QSpacerItem(288, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -71,7 +67,12 @@ class Ui_MainWindow(object):
         self.plainTextEditQueries = QtGui.QPlainTextEdit(self.centralwidget)
         self.plainTextEditQueries.setMaximumSize(QtCore.QSize(16777215, 70))
         font = QtGui.QFont()
+        font.setFamily(_fromUtf8("DejaVu Sans Mono"))
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setItalic(False)
         font.setUnderline(False)
+        font.setWeight(50)
         self.plainTextEditQueries.setFont(font)
         self.plainTextEditQueries.setObjectName(_fromUtf8("plainTextEditQueries"))
         self.verticalLayout.addWidget(self.plainTextEditQueries)
@@ -102,14 +103,13 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.addLayout(self.verticalLayout_2)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 19))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
         self.toolBar = QtGui.QToolBar(MainWindow)
-        self.toolBar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar", None, QtGui.QApplication.UnicodeUTF8))
         self.toolBar.setIconSize(QtCore.QSize(32, 32))
         self.toolBar.setObjectName(_fromUtf8("toolBar"))
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
@@ -117,15 +117,11 @@ class Ui_MainWindow(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/images/images/collection.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionNew_Collection.setIcon(icon)
-        self.actionNew_Collection.setText(QtGui.QApplication.translate("MainWindow", "New Collection", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionNew_Collection.setToolTip(QtGui.QApplication.translate("MainWindow", "Create a new collection", None, QtGui.QApplication.UnicodeUTF8))
         self.actionNew_Collection.setObjectName(_fromUtf8("actionNew_Collection"))
         self.actionRun_Query = QtGui.QAction(MainWindow)
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(_fromUtf8(":/images/images/RUN_Crystal_Clear_app_noatun.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionRun_Query.setIcon(icon1)
-        self.actionRun_Query.setText(QtGui.QApplication.translate("MainWindow", "Run Query", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionRun_Query.setToolTip(QtGui.QApplication.translate("MainWindow", "run a MongoDB Pymongo query", None, QtGui.QApplication.UnicodeUTF8))
         self.actionRun_Query.setObjectName(_fromUtf8("actionRun_Query"))
         self.toolBar.addAction(self.actionNew_Collection)
         self.toolBar.addAction(self.actionRun_Query)
@@ -135,8 +131,17 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
+        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("MainWindow", "Host:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("MainWindow", "Port:", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonConnect.setText(QtGui.QApplication.translate("MainWindow", "Connect", None, QtGui.QApplication.UnicodeUTF8))
         self.treeWidgetMain.setSortingEnabled(True)
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_table), QtGui.QApplication.translate("MainWindow", "Table", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_text), QtGui.QApplication.translate("MainWindow", "Text", None, QtGui.QApplication.UnicodeUTF8))
+        self.toolBar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionNew_Collection.setText(QtGui.QApplication.translate("MainWindow", "New Collection", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionNew_Collection.setToolTip(QtGui.QApplication.translate("MainWindow", "Create a new collection", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionRun_Query.setText(QtGui.QApplication.translate("MainWindow", "Run Query", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionRun_Query.setToolTip(QtGui.QApplication.translate("MainWindow", "run a MongoDB Pymongo query", None, QtGui.QApplication.UnicodeUTF8))
 
 import resources_rc

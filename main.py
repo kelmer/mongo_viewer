@@ -84,9 +84,11 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
             
             self.db = self.con[unicode(item.parent().text(0))]
             self.col = self.db[unicode(item.text(0))]
+
+            table = self.col.find().limit(1000)
                 
-            self.populate_text()
-            self.populate_main_table()
+            #self.populate_text(table)
+            self.populate_main_table(table)
 
         else:
             try:
@@ -123,17 +125,17 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
                 sub_icon.addPixmap(QPixmap(":/images/images/collection.png"), QIcon.Normal, QIcon.Off)
                 sub_item.setIcon(0,sub_icon)
 
-    def populate_text(self):
+    def populate_text(self, data):
         '''
         populates the textEditMain field with the data from self.collection
         '''
-        for i in self.col.find().limit(1000):                
-                self.textEditMain.append(unicode(i))
+        for i in data:                
+            self.textEditMain.append(unicode(i))
 
-    def populate_main_table(self):
+    def populate_main_table(self, data):
         '''
-        populates the main table with the data of the collection selected
-        to preserve memory it limits the rows to 1000
+        populates the main table with the data previously fetched by a query
+        data is the cursor resulted from a query
         '''
         headers = [i for i in self.col.find_one()]
         self.tableWidgetMain.clear()
@@ -142,13 +144,12 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
         self.tableWidgetMain.setColumnCount(len(headers))
         self.tableWidgetMain.setHorizontalHeaderLabels(headers)
         self.tableWidgetMain.setRowCount(ROW_LIMIT)
-        # the ROW COUNT above if there is not a LIMIT SHOULD BE CHANGED TO:
-        #self.col.find().limit(1000).count()
+        
                 
         row = 0
         column = 0
         
-        for j in self.col.find().limit(1000):            
+        for j in data:            
             for i in j:
                 if i in headers:
                     self.tableWidgetMain.setItem(row, headers.index(i), QTableWidgetItem(unicode(j[i])))
@@ -168,7 +169,8 @@ class MainWindow(QMainWindow,ui_main.Ui_MainWindow):
         run the pymongo query introduced in the plainTextEditQueries
         '''
         query = unicode(self.plainTextEditQueries.toPlainText())
-        print self.col.find(literal_eval(query)).count()
+        res = self.col.find(literal_eval(query))
+        self.populate_main_table(res)
         
 
 
